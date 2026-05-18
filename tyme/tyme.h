@@ -201,7 +201,7 @@ namespace tyme {
     public:
         ~WeekUnit() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit WeekUnit(const int year, const int month, const int index, const int start) : MonthUnit(year, month) {
             this->index = index;
@@ -292,28 +292,30 @@ namespace tyme {
         /**
          * @brief 通过索引初始化
          * @param names 名称列表
+         * @param size 名称数量
          * @param index 索引，支持负数，自动轮转
          */
-        LoopTyme(const vector<string> &names, const int index) : names(names), index(index_of(index)) {
+        LoopTyme(const char* const names[], int16_t size, const int index)
+            : names(names), size(size), index(index_of(index)) {
         }
 
         /**
          * @brief 通过名称初始化
          * @param names 名称列表
+         * @param size 名称数量
          * @param name 名称
          */
-        LoopTyme(const vector<string> &names, const string &name) : names(names), index(index_of(name)) {
+        LoopTyme(const char* const names[], int16_t size, const string &name)
+            : names(names), size(size), index(index_of(name)) {
         }
 
-        LoopTyme(const LoopTyme &other) {
-            names = other.names;
-            index = other.get_index();
-        }
+        LoopTyme(const LoopTyme &other) = default;
 
         LoopTyme& operator=(const LoopTyme &other) {
             if (this != &other) {
                 names = other.names;
-                index = other.get_index();
+                size = other.size;
+                index = other.index;
             }
             return *this;
         }
@@ -382,7 +384,12 @@ namespace tyme {
         /**
          * @brief 名称列表
          */
-        vector<string> names;
+        const char* const* names;
+
+        /**
+         * @brief 名称数量
+         */
+        int16_t size;
 
         /**
          * @brief 索引，从0开始
@@ -401,12 +408,12 @@ namespace tyme {
     public:
         ~Animal() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Animal(const int index) : LoopTyme(NAMES, index) {
+        explicit Animal(const int index) : LoopTyme(NAMES, 28, index) {
         }
 
-        explicit Animal(const string &name) : LoopTyme(NAMES, name) {
+        explicit Animal(const string &name) : LoopTyme(NAMES, 28, name) {
         }
 
         static Animal from_index(int index);
@@ -429,12 +436,12 @@ namespace tyme {
     public:
         ~Constellation() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Constellation(const int index) : LoopTyme(NAMES, index) {
+        explicit Constellation(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit Constellation(const string &name) : LoopTyme(NAMES, name) {
+        explicit Constellation(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static Constellation from_index(int index);
@@ -456,18 +463,18 @@ namespace tyme {
     public:
         ~Element() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Element(const int index) : LoopTyme(NAMES, index) {
+        explicit Element(const int index) : LoopTyme(NAMES, 5, index) {
         }
 
-        explicit Element(const string &name) : LoopTyme(NAMES, name) {
+        explicit Element(const string &name) : LoopTyme(NAMES, 5, name) {
         }
 
-        explicit Element(const vector<string> &names, const int index) : LoopTyme(names, index) {
+        explicit Element(const char* const names[], const int index) : LoopTyme(names, 5, index) {
         }
 
-        explicit Element(const vector<string> &names, const string &name) : LoopTyme(names, name) {
+        explicit Element(const char* const names[], const string &name) : LoopTyme(names, 5, name) {
         }
 
         static Element from_index(int index);
@@ -516,12 +523,12 @@ namespace tyme {
     public:
         ~Land() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Land(const int index) : LoopTyme(NAMES, index) {
+        explicit Land(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit Land(const string &name) : LoopTyme(NAMES, name) {
+        explicit Land(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static Land from_index(int index);
@@ -544,12 +551,12 @@ namespace tyme {
     public:
         ~Direction() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Direction(const int index) : LoopTyme(NAMES, index) {
+        explicit Direction(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit Direction(const string &name) : LoopTyme(NAMES, name) {
+        explicit Direction(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static Direction from_index(int index);
@@ -578,12 +585,12 @@ namespace tyme {
     public:
         ~Duty() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Duty(const int index) : LoopTyme(NAMES, index) {
+        explicit Duty(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit Duty(const string &name) : LoopTyme(NAMES, name) {
+        explicit Duty(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static Duty from_index(int index);
@@ -600,12 +607,12 @@ namespace tyme {
     public:
         ~Luck() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Luck(const int index) : LoopTyme(NAMES, index) {
+        explicit Luck(const int index) : LoopTyme(NAMES, 2, index) {
         }
 
-        explicit Luck(const string &name) : LoopTyme(NAMES, name) {
+        explicit Luck(const string &name) : LoopTyme(NAMES, 2, name) {
         }
 
         static Luck from_index(int index);
@@ -622,12 +629,12 @@ namespace tyme {
     public:
         ~Sixty() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Sixty(const int index) : LoopTyme(NAMES, index) {
+        explicit Sixty(const int index) : LoopTyme(NAMES, 3, index) {
         }
 
-        explicit Sixty(const string &name) : LoopTyme(NAMES, name) {
+        explicit Sixty(const string &name) : LoopTyme(NAMES, 3, name) {
         }
 
         static Sixty from_index(int index);
@@ -644,12 +651,12 @@ namespace tyme {
     public:
         ~Sound() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Sound(const int index) : LoopTyme(NAMES, index) {
+        explicit Sound(const int index) : LoopTyme(NAMES, 30, index) {
         }
 
-        explicit Sound(const string &name) : LoopTyme(NAMES, name) {
+        explicit Sound(const string &name) : LoopTyme(NAMES, 30, name) {
         }
 
         static Sound from_index(int index);
@@ -666,12 +673,12 @@ namespace tyme {
     public:
         ~Ten() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Ten(const int index) : LoopTyme(NAMES, index) {
+        explicit Ten(const int index) : LoopTyme(NAMES, 6, index) {
         }
 
-        explicit Ten(const string &name) : LoopTyme(NAMES, name) {
+        explicit Ten(const string &name) : LoopTyme(NAMES, 6, name) {
         }
 
         static Ten from_index(int index);
@@ -688,12 +695,12 @@ namespace tyme {
     public:
         ~Terrain() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Terrain(const int index) : LoopTyme(NAMES, index) {
+        explicit Terrain(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit Terrain(const string &name) : LoopTyme(NAMES, name) {
+        explicit Terrain(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static Terrain from_index(int index);
@@ -710,12 +717,12 @@ namespace tyme {
     public:
         ~Twenty() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Twenty(const int index) : LoopTyme(NAMES, index) {
+        explicit Twenty(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit Twenty(const string &name) : LoopTyme(NAMES, name) {
+        explicit Twenty(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static Twenty from_index(int index);
@@ -742,12 +749,12 @@ namespace tyme {
     public:
         ~Week() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Week(const int index) : LoopTyme(NAMES, index) {
+        explicit Week(const int index) : LoopTyme(NAMES, 7, index) {
         }
 
-        explicit Week(const string &name) : LoopTyme(NAMES, name) {
+        explicit Week(const string &name) : LoopTyme(NAMES, 7, name) {
         }
 
         static Week from_index(int index);
@@ -770,12 +777,12 @@ namespace tyme {
     public:
         ~SevenStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit SevenStar(const int index) : LoopTyme(NAMES, index) {
+        explicit SevenStar(const int index) : LoopTyme(NAMES, 7, index) {
         }
 
-        explicit SevenStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit SevenStar(const string &name) : LoopTyme(NAMES, 7, name) {
         }
 
         static SevenStar from_index(int index);
@@ -803,12 +810,12 @@ namespace tyme {
     public:
         ~Zodiac() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Zodiac(const int index) : LoopTyme(NAMES, index) {
+        explicit Zodiac(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit Zodiac(const string &name) : LoopTyme(NAMES, name) {
+        explicit Zodiac(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static Zodiac from_index(int index);
@@ -838,12 +845,12 @@ namespace tyme {
     public:
         ~Zone() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Zone(const int index) : LoopTyme(NAMES, index) {
+        explicit Zone(const int index) : LoopTyme(NAMES, 4, index) {
         }
 
-        explicit Zone(const string &name) : LoopTyme(NAMES, name) {
+        explicit Zone(const string &name) : LoopTyme(NAMES, 4, name) {
         }
 
         static Zone from_index(int index);
@@ -872,12 +879,12 @@ namespace tyme {
     public:
         ~Beast() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Beast(const int index) : LoopTyme(NAMES, index) {
+        explicit Beast(const int index) : LoopTyme(NAMES, 4, index) {
         }
 
-        explicit Beast(const string &name) : LoopTyme(NAMES, name) {
+        explicit Beast(const string &name) : LoopTyme(NAMES, 4, name) {
         }
 
         static Beast from_index(int index);
@@ -900,12 +907,12 @@ namespace tyme {
     public:
         ~TwentyEightStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit TwentyEightStar(const int index) : LoopTyme(NAMES, index) {
+        explicit TwentyEightStar(const int index) : LoopTyme(NAMES, 28, index) {
         }
 
-        explicit TwentyEightStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit TwentyEightStar(const string &name) : LoopTyme(NAMES, 28, name) {
         }
 
         static TwentyEightStar from_index(int index);
@@ -952,12 +959,12 @@ namespace tyme {
     public:
         ~Dipper() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Dipper(const int index) : LoopTyme(NAMES, index) {
+        explicit Dipper(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit Dipper(const string &name) : LoopTyme(NAMES, name) {
+        explicit Dipper(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static Dipper from_index(int index);
@@ -974,14 +981,14 @@ namespace tyme {
     public:
         ~NineStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         static const vector<string> COLORS;
 
-        explicit NineStar(const int index) : LoopTyme(NAMES, index) {
+        explicit NineStar(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit NineStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit NineStar(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static NineStar from_index(int index);
@@ -1024,12 +1031,12 @@ namespace tyme {
     public:
         ~SixStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit SixStar(const int index) : LoopTyme(NAMES, index) {
+        explicit SixStar(const int index) : LoopTyme(NAMES, 6, index) {
         }
 
-        explicit SixStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit SixStar(const string &name) : LoopTyme(NAMES, 6, name) {
         }
 
         static SixStar from_index(int index);
@@ -1046,12 +1053,12 @@ namespace tyme {
     public:
         ~TenStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit TenStar(const int index) : LoopTyme(NAMES, index) {
+        explicit TenStar(const int index) : LoopTyme(NAMES, 10, index) {
         }
 
-        explicit TenStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit TenStar(const string &name) : LoopTyme(NAMES, 10, name) {
         }
 
         static TenStar from_index(int index);
@@ -1068,12 +1075,12 @@ namespace tyme {
     public:
         ~Ecliptic() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Ecliptic(const int index) : LoopTyme(NAMES, index) {
+        explicit Ecliptic(const int index) : LoopTyme(NAMES, 2, index) {
         }
 
-        explicit Ecliptic(const string &name) : LoopTyme(NAMES, name) {
+        explicit Ecliptic(const string &name) : LoopTyme(NAMES, 2, name) {
         }
 
         static Ecliptic from_index(int index);
@@ -1096,12 +1103,12 @@ namespace tyme {
     public:
         ~TwelveStar() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit TwelveStar(const int index) : LoopTyme(NAMES, index) {
+        explicit TwelveStar(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit TwelveStar(const string &name) : LoopTyme(NAMES, name) {
+        explicit TwelveStar(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static TwelveStar from_index(int index);
@@ -1124,12 +1131,12 @@ namespace tyme {
     public:
         ~Dog() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Dog(const int index) : LoopTyme(NAMES, index) {
+        explicit Dog(const int index) : LoopTyme(NAMES, 3, index) {
         }
 
-        explicit Dog(const string &name) : LoopTyme(NAMES, name) {
+        explicit Dog(const string &name) : LoopTyme(NAMES, 3, name) {
         }
 
         static Dog from_index(int index);
@@ -1175,9 +1182,9 @@ namespace tyme {
     public:
         ~FetusHeavenStem() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit FetusHeavenStem(const int index) : LoopTyme(NAMES, index) {
+        explicit FetusHeavenStem(const int index) : LoopTyme(NAMES, 5, index) {
         }
 
         static FetusHeavenStem from_index(int index);
@@ -1192,9 +1199,9 @@ namespace tyme {
     public:
         ~FetusEarthBranch() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit FetusEarthBranch(const int index) : LoopTyme(NAMES, index) {
+        explicit FetusEarthBranch(const int index) : LoopTyme(NAMES, 6, index) {
         }
 
         static FetusEarthBranch from_index(int index);
@@ -1209,12 +1216,12 @@ namespace tyme {
     public:
         ~Nine() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Nine(const int index) : LoopTyme(NAMES, index) {
+        explicit Nine(const int index) : LoopTyme(NAMES, 9, index) {
         }
 
-        explicit Nine(const string &name) : LoopTyme(NAMES, name) {
+        explicit Nine(const string &name) : LoopTyme(NAMES, 9, name) {
         }
 
         static Nine from_index(int index);
@@ -1260,12 +1267,12 @@ namespace tyme {
     public:
         ~PengZuHeavenStem() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit PengZuHeavenStem(const int index) : LoopTyme(NAMES, index) {
+        explicit PengZuHeavenStem(const int index) : LoopTyme(NAMES, 10, index) {
         }
 
-        explicit PengZuHeavenStem(const string &name) : LoopTyme(NAMES, name) {
+        explicit PengZuHeavenStem(const string &name) : LoopTyme(NAMES, 10, name) {
         }
 
         static PengZuHeavenStem from_index(int index);
@@ -1282,12 +1289,12 @@ namespace tyme {
     public:
         ~PengZuEarthBranch() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit PengZuEarthBranch(const int index) : LoopTyme(NAMES, index) {
+        explicit PengZuEarthBranch(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit PengZuEarthBranch(const string &name) : LoopTyme(NAMES, name) {
+        explicit PengZuEarthBranch(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static PengZuEarthBranch from_index(int index);
@@ -1304,12 +1311,12 @@ namespace tyme {
     public:
         ~ThreePhenology() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit ThreePhenology(const int index) : LoopTyme(NAMES, index) {
+        explicit ThreePhenology(const int index) : LoopTyme(NAMES, 3, index) {
         }
 
-        explicit ThreePhenology(const string &name) : LoopTyme(NAMES, name) {
+        explicit ThreePhenology(const string &name) : LoopTyme(NAMES, 3, name) {
         }
 
         static ThreePhenology from_index(int index);
@@ -1326,12 +1333,12 @@ namespace tyme {
     public:
         ~PlumRain() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit PlumRain(const int index) : LoopTyme(NAMES, index) {
+        explicit PlumRain(const int index) : LoopTyme(NAMES, 2, index) {
         }
 
-        explicit PlumRain(const string &name) : LoopTyme(NAMES, name) {
+        explicit PlumRain(const string &name) : LoopTyme(NAMES, 2, name) {
         }
 
         static PlumRain from_index(int index);
@@ -1377,12 +1384,12 @@ namespace tyme {
     public:
         ~MinorRen() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit MinorRen(const int index) : LoopTyme(NAMES, index) {
+        explicit MinorRen(const int index) : LoopTyme(NAMES, 6, index) {
         }
 
-        explicit MinorRen(const string &name) : LoopTyme(NAMES, name) {
+        explicit MinorRen(const string &name) : LoopTyme(NAMES, 6, name) {
         }
 
         static MinorRen from_index(int index);
@@ -1411,12 +1418,12 @@ namespace tyme {
     public:
         ~HeavenStem() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit HeavenStem(const int index) : LoopTyme(NAMES, index) {
+        explicit HeavenStem(const int index) : LoopTyme(NAMES, 10, index) {
         }
 
-        explicit HeavenStem(const string &name) : LoopTyme(NAMES, name) {
+        explicit HeavenStem(const string &name) : LoopTyme(NAMES, 10, name) {
         }
 
         static HeavenStem from_index(int index);
@@ -1587,12 +1594,12 @@ namespace tyme {
     public:
         ~EarthBranch() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit EarthBranch(const int index) : LoopTyme(NAMES, index) {
+        explicit EarthBranch(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit EarthBranch(const string &name) : LoopTyme(NAMES, name) {
+        explicit EarthBranch(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         static EarthBranch from_index(int index);
@@ -1699,12 +1706,12 @@ namespace tyme {
     public:
         ~SixtyCycle() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit SixtyCycle(const int index) : LoopTyme(NAMES, index) {
+        explicit SixtyCycle(const int index) : LoopTyme(NAMES, 60, index) {
         }
 
-        explicit SixtyCycle(const string &name) : LoopTyme(NAMES, name) {
+        explicit SixtyCycle(const string &name) : LoopTyme(NAMES, 60, name) {
         }
 
         static SixtyCycle from_index(int index);
@@ -1757,12 +1764,12 @@ namespace tyme {
     public:
         ~God() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit God(const int index) : LoopTyme(NAMES, index) {
+        explicit God(const int index) : LoopTyme(NAMES, 151, index) {
         }
 
-        explicit God(const string &name) : LoopTyme(NAMES, name) {
+        explicit God(const string &name) : LoopTyme(NAMES, 151, name) {
         }
 
         static God from_index(int index);
@@ -1790,12 +1797,12 @@ namespace tyme {
     public:
         ~Taboo() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Taboo(const int index) : LoopTyme(NAMES, index) {
+        explicit Taboo(const int index) : LoopTyme(NAMES, 140, index) {
         }
 
-        explicit Taboo(const string &name) : LoopTyme(NAMES, name) {
+        explicit Taboo(const string &name) : LoopTyme(NAMES, 140, name) {
         }
 
         static Taboo from_index(int index);
@@ -2232,12 +2239,12 @@ namespace tyme {
     public:
         ~LunarSeason() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit LunarSeason(const int index) : LoopTyme(NAMES, index) {
+        explicit LunarSeason(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
-        explicit LunarSeason(const string &name) : LoopTyme(NAMES, name) {
+        explicit LunarSeason(const string &name) : LoopTyme(NAMES, 12, name) {
         }
 
         LunarSeason(const LunarSeason &other) = default;
@@ -2261,14 +2268,14 @@ namespace tyme {
     public:
         ~SolarTerm() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit SolarTerm(const int year, const int index) : LoopTyme(NAMES, index) {
+        explicit SolarTerm(const int year, const int index) : LoopTyme(NAMES, 24, index) {
             const int size = get_size();
             init_by_year((year * size + index) / size, get_index());
         }
 
-        explicit SolarTerm(const int year, const string &name) : LoopTyme(NAMES, name) {
+        explicit SolarTerm(const int year, const string &name) : LoopTyme(NAMES, 24, name) {
             init_by_year(year, index);
         }
 
@@ -2335,7 +2342,7 @@ namespace tyme {
     public:
         ~LunarMonth() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         LunarMonth(const LunarMonth &other): MonthUnit(other.year, other.month), leap(other.leap) {
         }
@@ -2531,7 +2538,7 @@ namespace tyme {
     public:
         ~LunarDay() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit LunarDay(const int year, const int month, const int day) : DayUnit(year, month, day) {
             validate(year, month, day);
@@ -2943,7 +2950,7 @@ namespace tyme {
     public:
         ~SolarHalfYear() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit SolarHalfYear(const int year, const int index) : YearUnit(year) {
             validate(year, index);
@@ -2998,7 +3005,7 @@ namespace tyme {
     public:
         ~SolarSeason() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit SolarSeason(const int year, const int index) : YearUnit(year) {
             validate(year, index);
@@ -3047,7 +3054,7 @@ namespace tyme {
     public:
         ~SolarMonth() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
         static const int8_t DAYS[];
 
         explicit SolarMonth(const int year, const int month) : MonthUnit(year, month) {
@@ -3137,7 +3144,7 @@ namespace tyme {
     public:
         ~SolarDay() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit SolarDay(const int year, const int month, const int day) : DayUnit(year, month, day) {
             validate(year, month, day);
@@ -3703,9 +3710,9 @@ namespace tyme {
     public:
         ~FetusMonth() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit FetusMonth(const int index) : LoopTyme(NAMES, index) {
+        explicit FetusMonth(const int index) : LoopTyme(NAMES, 12, index) {
         }
 
         static optional<FetusMonth> from_lunar_month(const LunarMonth &lunar_month);
@@ -4127,13 +4134,13 @@ namespace tyme {
     public:
         ~Phenology() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Phenology(const int year, const int index) : LoopTyme(NAMES, index) {
+        explicit Phenology(const int year, const int index) : LoopTyme(NAMES, 72, index) {
             this->year = year;
         }
 
-        explicit Phenology(const int year, const string &name) : LoopTyme(NAMES, name) {
+        explicit Phenology(const int year, const string &name) : LoopTyme(NAMES, 72, name) {
             const int size = get_size();
             this->year = (year * size + index) / size;
         }
@@ -4616,7 +4623,7 @@ namespace tyme {
     public:
         ~LegalHoliday() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
         static string DATA;
 
         explicit LegalHoliday(const int year, const int month, const int day, const string &data): day(SolarDay::from_ymd(year, month, day)), name(NAMES[data[9] - '0']), work(data[8] == '0'), target(compute_target(data)) {
@@ -4666,7 +4673,7 @@ namespace tyme {
      */
     class RabByungElement : public Element {
     public:
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         ~RabByungElement() override = default;
 
@@ -4725,10 +4732,10 @@ namespace tyme {
             if (rab_byung_index < 0 || rab_byung_index > 150) {
                 throw invalid_argument("illegal rab-byung index: " + std::to_string(rab_byung_index));
             }
-            if (element_index < 0 || static_cast<size_t>(element_index) >= RabByungElement::NAMES.size()) {
+            if (element_index < 0 || static_cast<size_t>(element_index) >= 5) {
                 throw invalid_argument("illegal element index: " + std::to_string(element_index));
             }
-            if (zodiac_index < 0 || static_cast<size_t>(zodiac_index) >= Zodiac::NAMES.size()) {
+            if (zodiac_index < 0 || static_cast<size_t>(zodiac_index) >= 12) {
                 throw invalid_argument("illegal zodiac index: " + std::to_string(zodiac_index));
             }
         }
@@ -4947,7 +4954,7 @@ namespace tyme {
     public:
         ~RabByungDay() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
         explicit RabByungDay(const int year, const int month, const int day): DayUnit(year, month, abs(day)), leap(day < 0) {
             validate(year, month, day);
@@ -5009,15 +5016,15 @@ namespace tyme {
     public:
         ~Phase() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
 
-        explicit Phase(const int lunar_year, const int lunar_month, const int index) : LoopTyme(NAMES, index) {
-            const LunarMonth m = LunarMonth::from_ym(lunar_year, lunar_month).next(index / static_cast<int>(NAMES.size()));
+        explicit Phase(const int lunar_year, const int lunar_month, const int index) : LoopTyme(NAMES, 8, index) {
+            const LunarMonth m = LunarMonth::from_ym(lunar_year, lunar_month).next(index / 8);
             this->lunar_year = m.get_year();
             this->lunar_month = m.get_month_with_leap();
         }
 
-        explicit Phase(const int lunar_year, const int lunar_month, const string &name) : LoopTyme(NAMES, name), lunar_year(lunar_year), lunar_month(lunar_month) {
+        explicit Phase(const int lunar_year, const int lunar_month, const string &name) : LoopTyme(NAMES, 8, name), lunar_year(lunar_year), lunar_month(lunar_month) {
         }
 
         static Phase from_index(int lunar_year, int lunar_month, int index);
@@ -5384,7 +5391,7 @@ namespace tyme {
     public:
         ~SolarFestival() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
         static string DATA;
 
         explicit SolarFestival(const FestivalType type, const int index, const Event& event, const SolarDay& day) : AbstractFestival(type, index, event, day) {
@@ -5410,7 +5417,7 @@ namespace tyme {
     public:
         ~LunarFestival() override = default;
 
-        static const vector<string> NAMES;
+        static const char* const NAMES[];
         static string DATA;
 
         explicit LunarFestival(const FestivalType type, const int index, const Event& event, const LunarDay& day) : AbstractFestival(type, index, event, day) {

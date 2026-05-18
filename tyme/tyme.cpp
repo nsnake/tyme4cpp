@@ -40,7 +40,7 @@ namespace tyme {
         return day;
     }
 
-    const vector<string> WeekUnit::NAMES = {
+    const char* const WeekUnit::NAMES[] = {
         "第一周", "第二周", "第三周", "第四周", "第五周", "第六周"
     };
 
@@ -90,7 +90,7 @@ namespace tyme {
     }
 
     int LoopTyme::get_size() const {
-        return static_cast<int>(names.size());
+        return size;
     }
 
     string LoopTyme::get_name() const {
@@ -98,7 +98,7 @@ namespace tyme {
     }
 
     int LoopTyme::index_of(const string &name) const {
-        for (int i = 0, j = get_size(); i < j; i++) {
+        for (int i = 0; i < size; i++) {
             if (name == names[i]) {
                 return i;
             }
@@ -129,7 +129,7 @@ namespace tyme {
         return d1 <= abs(d2) ? d1 : d2;
     }
 
-    const vector<string> Animal::NAMES = {
+    const char* const Animal::NAMES[] = {
         "蛟", "龙", "貉", "兔", "狐", "虎", "豹", "獬", "牛", "蝠", "鼠", "燕", "猪", "獝", "狼", "狗", "彘", "鸡", "乌", "猴", "猿", "犴", "羊", "獐", "马", "鹿", "蛇", "蚓"
     };
 
@@ -149,7 +149,7 @@ namespace tyme {
         return TwentyEightStar::from_index(index);
     }
 
-    const vector<string> Beast::NAMES = {
+    const char* const Beast::NAMES[] = {
         "青龙", "玄武", "白虎", "朱雀"
     };
 
@@ -169,7 +169,7 @@ namespace tyme {
         return Zone::from_index(index);
     }
 
-    const vector<string> Constellation::NAMES = {
+    const char* const Constellation::NAMES[] = {
         "白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎", "射手", "摩羯", "水瓶", "双鱼"
     };
 
@@ -188,7 +188,7 @@ namespace tyme {
     /**
      * @brief 依据后天八卦排序（0坎北, 1坤西南, 2震东, 3巽东南, 4中, 5乾西北, 6兑西, 7艮东北, 8离南）
      */
-    const vector<string> Direction::NAMES = {
+    const char* const Direction::NAMES[] = {
         "北", "西南", "东", "东南", "中", "西北", "西", "东北", "南"
     };
 
@@ -213,7 +213,7 @@ namespace tyme {
         return Element::from_index(indices[index]);
     }
 
-    const vector<string> Duty::NAMES = {
+    const char* const Duty::NAMES[] = {
         "建", "除", "满", "平", "定", "执", "破", "危", "成", "收", "开", "闭"
     };
 
@@ -229,7 +229,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Element::NAMES = {
+    const char* const Element::NAMES[] = {
         "木", "火", "土", "金", "水"
     };
 
@@ -271,7 +271,7 @@ namespace tyme {
         return Direction::from_index(indices[index]);
     }
 
-    const vector<string> God::NAMES = {
+    const char* const God::NAMES[] = {
         "天恩", "鸣吠", "母仓", "不将", "四相", "鸣吠对", "五合", "三合", "除神", "月德", "月空", "月德合", "月恩", "时阴", "五富", "生气", "金匮", "相日", "阴德", "六合", "益后", "青龙", "续世", "明堂", "王日", "要安", "官日", "吉期", "福德", "六仪", "金堂", "宝光", "民日", "临日", "天马", "敬安", "普护", "驿马", "天后", "阳德", "天喜", "天医", "司命", "圣心", "玉宇", "守日", "时德", "解神", "时阳", "天仓", "天巫", "玉堂", "福生", "天德", "天德合", "天愿", "天赦", "天符", "阴神", "解除", "五虚", "五离", "重日", "复日", "血支", "天贼", "土符", "游祸", "白虎", "小耗", "致死", "河魁", "劫煞", "月煞", "月建", "往亡", "大时", "大败", "咸池", "厌对", "招摇", "九坎", "九焦", "天罡", "死神", "月害", "死气", "月破", "大耗", "天牢", "元武", "月厌", "月虚", "归忌", "小时", "天刑", "朱雀", "九空", "天吏", "地火", "四击", "大煞", "勾陈", "八专", "灾煞", "天火", "血忌", "土府", "月刑", "触水龙", "地囊", "八风", "四废", "四忌", "四穷", "五墓", "阴错", "四耗", "阳错", "孤辰", "小会", "大会", "八龙", "七鸟", "九虎", "六蛇", "天狗", "行狠", "了戾", "岁薄", "逐阵", "三丧", "三阴", "阴道冲阳", "阴位", "阴阳交破", "阴阳俱错", "阴阳击冲", "鬼哭", "单阴", "绝阴", "纯阳", "阳错阴冲", "七符", "成日", "孤阳", "绝阳", "纯阴", "大退", "四离", "阳破阴冲"
     };
 
@@ -321,7 +321,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> Land::NAMES = {
+    const char* const Land::NAMES[] = {
         "玄天", "朱天", "苍天", "阳天", "钧天", "幽天", "颢天", "变天", "炎天"
     };
 
@@ -341,7 +341,7 @@ namespace tyme {
         return Direction::from_index(index);
     }
 
-    const vector<string> Luck::NAMES = {
+    const char* const Luck::NAMES[] = {
         "吉", "凶"
     };
 
@@ -357,7 +357,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Phase::NAMES = {
+    const char* const Phase::NAMES[] = {
         "新月", "蛾眉月", "上弦月", "盈凸月", "满月", "亏凸月", "下弦月", "残月"
     };
 
@@ -426,7 +426,7 @@ namespace tyme {
         return phase.to_string() + "第" + std::to_string(day_index + 1) + "天";
     }
 
-    const vector<string> Sixty::NAMES = {
+    const char* const Sixty::NAMES[] = {
         "上元", "中元", "下元"
     };
 
@@ -442,7 +442,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Sound::NAMES = {
+    const char* const Sound::NAMES[] = {
         "海中金", "炉中火", "大林木", "路旁土", "剑锋金", "山头火", "涧下水", "城头土", "白蜡金", "杨柳木", "泉中水", "屋上土", "霹雳火", "松柏木", "长流水", "沙中金", "山下火", "平地木", "壁上土", "金箔金", "覆灯火", "天河水", "大驿土", "钗钏金", "桑柘木", "大溪水", "沙中土", "天上火", "石榴木", "大海水"
     };
 
@@ -458,7 +458,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Taboo::NAMES = {
+    const char* const Taboo::NAMES[] = {
         "祭祀", "祈福", "求嗣", "开光", "塑绘", "齐醮", "斋醮", "沐浴", "酬神", "造庙", "祀灶", "焚香", "谢土", "出火", "雕刻", "嫁娶", "订婚", "纳采", "问名", "纳婿", "归宁", "安床", "合帐", "冠笄", "订盟", "进人口", "裁衣", "挽面", "开容", "修坟", "启钻", "破土", "安葬", "立碑", "成服", "除服", "开生坟", "合寿木", "入殓", "移柩", "普渡", "入宅", "安香", "安门", "修造", "起基", "动土", "上梁", "竖柱", "开井开池", "作陂放水", "拆卸", "破屋", "坏垣", "补垣", "伐木做梁", "作灶", "解除", "开柱眼", "穿屏扇架", "盖屋合脊", "开厕", "造仓", "塞穴", "平治道涂", "造桥", "作厕", "筑堤", "开池", "伐木", "开渠", "掘井", "扫舍", "放水", "造屋", "合脊", "造畜稠", "修门", "定磉", "作梁", "修饰垣墙", "架马", "开市", "挂匾", "纳财", "求财", "开仓", "买车", "置产", "雇佣", "出货财", "安机械", "造车器", "经络", "酝酿", "作染", "鼓铸", "造船", "割蜜", "栽种", "取渔", "结网", "牧养", "安碓磑", "习艺", "入学", "理发", "探病", "见贵", "乘船", "渡水", "针灸", "出行", "移徙", "分居", "剃头", "整手足甲", "纳畜", "捕捉", "畋猎", "教牛马", "会亲友", "赴任", "求医", "治病", "词讼", "起基动土", "破屋坏垣", "盖屋", "造仓库", "交易", "立券", "安机", "会友", "求医疗病", "诸事不宜", "馀事勿取", "行丧", "断蚁", "归岫"
     };
 
@@ -546,7 +546,7 @@ namespace tyme {
         return get_taboos(HOUR_TABOO, hour.get_earth_branch().get_index(), day.get_index(), 1);
     }
 
-    const vector<string> Ten::NAMES = {
+    const char* const Ten::NAMES[] = {
         "甲子", "甲戌", "甲申", "甲午", "甲辰", "甲寅"
     };
 
@@ -562,7 +562,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Terrain::NAMES = {
+    const char* const Terrain::NAMES[] = {
         "长生", "沐浴", "冠带", "临官", "帝旺", "衰", "病", "死", "墓", "绝", "胎", "养"
     };
 
@@ -578,7 +578,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Twenty::NAMES = {
+    const char* const Twenty::NAMES[] = {
         "一运", "二运", "三运", "四运", "五运", "六运", "七运", "八运", "九运"
     };
 
@@ -598,7 +598,7 @@ namespace tyme {
         return Sixty::from_index(index / 3);
     }
 
-    const vector<string> Week::NAMES = {
+    const char* const Week::NAMES[] = {
         "日", "一", "二", "三", "四", "五", "六"
     };
 
@@ -618,7 +618,7 @@ namespace tyme {
         return SevenStar::from_index(index);
     }
 
-    const vector<string> Zodiac::NAMES = {
+    const char* const Zodiac::NAMES[] = {
         "鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"
     };
 
@@ -642,7 +642,7 @@ namespace tyme {
         return EarthBranch::from_index(index);
     }
 
-    const vector<string> Zone::NAMES = {
+    const char* const Zone::NAMES[] = {
         "东", "北", "西", "南"
     };
 
@@ -742,7 +742,7 @@ namespace tyme {
         return "灶马头";
     }
 
-    const vector<string> Dog::NAMES = {
+    const char* const Dog::NAMES[] = {
         "初伏", "中伏", "末伏"
     };
 
@@ -774,7 +774,7 @@ namespace tyme {
         return dog.to_string() + "第" + std::to_string(day_index + 1) + "天";
     }
 
-    const vector<string> FetusHeavenStem::NAMES = {
+    const char* const FetusHeavenStem::NAMES[] = {
         "门", "碓磨", "厨灶", "仓库", "房床"
     };
 
@@ -786,7 +786,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> FetusEarthBranch::NAMES = {
+    const char* const FetusEarthBranch::NAMES[] = {
         "碓", "厕", "炉", "门", "栖", "床"
     };
 
@@ -798,7 +798,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> FetusMonth::NAMES = {
+    const char* const FetusMonth::NAMES[] = {
         "占房床", "占户窗", "占门堂", "占厨灶", "占房床", "占床仓", "占碓磨", "占厕户", "占门房", "占房床", "占灶炉", "占房床"
     };
 
@@ -863,7 +863,7 @@ namespace tyme {
         return fetus_earth_branch;
     }
 
-    const vector<string> Nine::NAMES = {
+    const char* const Nine::NAMES[] = {
         "一九", "二九", "三九", "四九", "五九", "六九", "七九", "八九", "九九"
     };
 
@@ -895,7 +895,7 @@ namespace tyme {
         return nine.to_string() + "第" + std::to_string(day_index + 1) + "天";
     }
 
-    const vector<string> PengZuHeavenStem::NAMES = {
+    const char* const PengZuHeavenStem::NAMES[] = {
         "甲不开仓财物耗散", "乙不栽植千株不长", "丙不修灶必见灾殃", "丁不剃头头必生疮", "戊不受田田主不祥", "己不破券二比并亡", "庚不经络织机虚张", "辛不合酱主人不尝", "壬不泱水更难提防", "癸不词讼理弱敌强"
     };
 
@@ -911,7 +911,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> PengZuEarthBranch::NAMES = {
+    const char* const PengZuEarthBranch::NAMES[] = {
         "子不问卜自惹祸殃", "丑不冠带主不还乡", "寅不祭祀神鬼不尝", "卯不穿井水泉不香", "辰不哭泣必主重丧", "巳不远行财物伏藏", "午不苫盖屋主更张", "未不服药毒气入肠", "申不安床鬼祟入房", "酉不会客醉坐颠狂", "戌不吃犬作怪上床", "亥不嫁娶不利新郎"
     };
 
@@ -943,7 +943,7 @@ namespace tyme {
         return peng_zu_earth_branch;
     }
 
-    const vector<string> Phenology::NAMES = {
+    const char* const Phenology::NAMES[] = {
         "蚯蚓结", "麋角解", "水泉动", "雁北乡", "鹊始巢", "雉始雊", "鸡始乳", "征鸟厉疾", "水泽腹坚", "东风解冻", "蛰虫始振", "鱼陟负冰", "獭祭鱼", "候雁北", "草木萌动", "桃始华", "仓庚鸣", "鹰化为鸠", "玄鸟至", "雷乃发声", "始电", "桐始华", "田鼠化为鴽", "虹始见", "萍始生", "鸣鸠拂其羽", "戴胜降于桑", "蝼蝈鸣", "蚯蚓出", "王瓜生", "苦菜秀", "靡草死", "麦秋至", "螳螂生", "鵙始鸣", "反舌无声", "鹿角解", "蜩始鸣", "半夏生", "温风至", "蟋蟀居壁", "鹰始挚", "腐草为萤", "土润溽暑", "大雨行时", "凉风至", "白露降", "寒蝉鸣", "鹰乃祭鸟", "天地始肃", "禾乃登", "鸿雁来", "玄鸟归", "群鸟养羞", "雷始收声", "蛰虫坯户", "水始涸", "鸿雁来宾", "雀入大水为蛤", "菊有黄花", "豺乃祭兽", "草木黄落", "蛰虫咸俯", "水始冰", "地始冻", "雉入大水为蜃", "虹藏不见", "天气上升地气下降", "闭塞而成冬", "鹖鴠不鸣", "虎始交", "荔挺出"
     };
 
@@ -990,7 +990,7 @@ namespace tyme {
         return phenology.to_string() + "第" + std::to_string(day_index + 1) + "天";
     }
 
-    const vector<string> ThreePhenology::NAMES = {
+    const char* const ThreePhenology::NAMES[] = {
         "初候", "二候", "三候"
     };
 
@@ -1006,7 +1006,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> PlumRain::NAMES = {
+    const char* const PlumRain::NAMES[] = {
         "入梅", "出梅"
     };
 
@@ -1038,7 +1038,7 @@ namespace tyme {
         return get_plum_rain().get_index() == 0 ? plum_rain.to_string() + "第" + std::to_string(day_index + 1) + "天" : get_name();
     }
 
-    const vector<string> MinorRen::NAMES = {
+    const char* const MinorRen::NAMES[] = {
         "大安", "留连", "速喜", "赤口", "小吉", "空亡"
     };
 
@@ -1063,7 +1063,7 @@ namespace tyme {
         return Element::from_index(indices[index]);
     }
 
-    const vector<string> Dipper::NAMES = {
+    const char* const Dipper::NAMES[] = {
         "天枢", "天璇", "天玑", "天权", "玉衡", "开阳", "摇光", "洞明", "隐元"
     };
 
@@ -1079,7 +1079,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> NineStar::NAMES = {
+    const char* const NineStar::NAMES[] = {
         "一", "二", "三", "四", "五", "六", "七", "八", "九"
     };
 
@@ -1119,7 +1119,7 @@ namespace tyme {
         return get_name() + get_color() + get_element().to_string();
     }
 
-    const vector<string> SevenStar::NAMES = {
+    const char* const SevenStar::NAMES[] = {
         "日", "月", "火", "水", "木", "金", "土"
     };
 
@@ -1139,7 +1139,7 @@ namespace tyme {
         return Week::from_index(index);
     }
 
-    const vector<string> SixStar::NAMES = {
+    const char* const SixStar::NAMES[] = {
         "先胜", "友引", "先负", "佛灭", "大安", "赤口"
     };
 
@@ -1155,7 +1155,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> TenStar::NAMES = {
+    const char* const TenStar::NAMES[] = {
         "比肩", "劫财", "食神", "伤官", "偏财", "正财", "七杀", "正官", "偏印", "正印"
     };
 
@@ -1171,7 +1171,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> Ecliptic::NAMES = {
+    const char* const Ecliptic::NAMES[] = {
         "黄道", "黑道"
     };
 
@@ -1191,7 +1191,7 @@ namespace tyme {
         return Luck::from_index(index);
     }
 
-    const vector<string> TwelveStar::NAMES = {
+    const char* const TwelveStar::NAMES[] = {
         "青龙", "明堂", "天刑", "朱雀", "金匮", "天德", "白虎", "玉堂", "天牢", "玄武", "司命", "勾陈"
     };
 
@@ -1212,7 +1212,7 @@ namespace tyme {
         return Ecliptic::from_index(indices[index]);
     }
 
-    const vector<string> TwentyEightStar::NAMES = {
+    const char* const TwentyEightStar::NAMES[] = {
         "角", "亢", "氐", "房", "心", "尾", "箕", "斗", "牛", "女", "虚", "危", "室", "壁", "奎", "娄", "胃", "昴", "毕", "觜", "参", "井", "鬼", "柳", "星", "张", "翼", "轸"
     };
 
@@ -1333,7 +1333,7 @@ namespace tyme {
         return get_solar_time().get_solar_day();
     }
 
-    const vector<string> HeavenStem::NAMES = {
+    const char* const HeavenStem::NAMES[] = {
         "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"
     };
 
@@ -1449,7 +1449,7 @@ namespace tyme {
         return to_string() == other.to_string();
     }
 
-    const vector<string> EarthBranch::NAMES = {
+    const char* const EarthBranch::NAMES[] = {
         "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"
     };
 
@@ -1549,7 +1549,7 @@ namespace tyme {
         return nullopt;
     }
 
-    const vector<string> SixtyCycle::NAMES = {
+    const char* const SixtyCycle::NAMES[] = {
         "甲子", "乙丑", "丙寅", "丁卯", "戊辰", "己巳", "庚午", "辛未", "壬申", "癸酉", "甲戌", "乙亥", "丙子", "丁丑", "戊寅", "己卯", "庚辰", "辛巳", "壬午", "癸未", "甲申", "乙酉", "丙戌", "丁亥", "戊子", "己丑", "庚寅", "辛卯", "壬辰", "癸巳", "甲午", "乙未", "丙申", "丁酉", "戊戌", "己亥", "庚子", "辛丑", "壬寅", "癸卯", "甲辰", "乙巳", "丙午", "丁未", "戊申", "己酉", "庚戌", "辛亥", "壬子", "癸丑", "甲寅", "乙卯", "丙辰", "丁巳", "戊午", "己未", "庚申", "辛酉", "壬戌", "癸亥"
     };
 
@@ -1566,11 +1566,11 @@ namespace tyme {
     }
 
     HeavenStem SixtyCycle::get_heaven_stem() const {
-        return HeavenStem::from_index(index % static_cast<int>(HeavenStem::NAMES.size()));
+        return HeavenStem::from_index(index % 10);
     }
 
     EarthBranch SixtyCycle::get_earth_branch() const {
-        return EarthBranch::from_index(index % static_cast<int>(EarthBranch::NAMES.size()));
+        return EarthBranch::from_index(index % 12);
     }
 
     Sound SixtyCycle::get_sound() const {
@@ -1971,7 +1971,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> LunarSeason::NAMES = {"孟春", "仲春", "季春", "孟夏", "仲夏", "季夏", "孟秋", "仲秋", "季秋", "孟冬", "仲冬", "季冬"};
+    const char* const LunarSeason::NAMES[] = {"孟春", "仲春", "季春", "孟夏", "仲夏", "季夏", "孟秋", "仲秋", "季秋", "孟冬", "仲冬", "季冬"};
 
     LunarSeason LunarSeason::from_index(const int index) {
         return LunarSeason(index);
@@ -1985,7 +1985,7 @@ namespace tyme {
         return from_index(next_index(n));
     }
 
-    const vector<string> LunarMonth::NAMES = {"正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
+    const char* const LunarMonth::NAMES[] = {"正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
 
     void LunarMonth::validate(const int year, const int month) {
         if (month == 0 || month > 12 || month < -12) {
@@ -2242,7 +2242,7 @@ namespace tyme {
         return get_first_day().equals(other.get_first_day());
     }
 
-    const vector<string> LunarDay::NAMES = {
+    const char* const LunarDay::NAMES[] = {
         "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"
     };
 
@@ -2518,7 +2518,7 @@ namespace tyme {
 
     EightCharProvider* LunarHour::provider = new DefaultEightCharProvider();
 
-    const vector<string> SolarTerm::NAMES = {
+    const char* const SolarTerm::NAMES[] = {
         "冬至", "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪"
     };
 
@@ -2646,7 +2646,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> SolarHalfYear::NAMES = {
+    const char* const SolarHalfYear::NAMES[] = {
         "上半年", "下半年"
     };
 
@@ -2699,7 +2699,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> SolarSeason::NAMES = {
+    const char* const SolarSeason::NAMES[] = {
         "一季度", "二季度", "三季度", "四季度"
     };
 
@@ -2743,7 +2743,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> SolarMonth::NAMES = {
+    const char* const SolarMonth::NAMES[] = {
         "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"
     };
 
@@ -2902,7 +2902,7 @@ namespace tyme {
         return get_first_day().equals(other.get_first_day());
     }
 
-    const vector<string> SolarDay::NAMES = {
+    const char* const SolarDay::NAMES[] = {
         "1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日", "15日", "16日", "17日", "18日", "19日", "20日", "21日", "22日", "23日", "24日", "25日", "26日", "27日", "28日", "29日", "30日", "31日"
     };
 
@@ -3780,7 +3780,7 @@ namespace tyme {
         return next(birth_time, year, month, day, hour, 0, 0);
     }
 
-    const vector<string> LegalHoliday::NAMES = {
+    const char* const LegalHoliday::NAMES[] = {
         "元旦", "春节", "清明节", "劳动节", "端午节", "中秋节", "国庆节", "国庆中秋", "抗战胜利日"
     };
 
@@ -3909,14 +3909,14 @@ namespace tyme {
         return event.get_name();
     }
 
-    const vector<string> SolarFestival::NAMES = {
+    const char* const SolarFestival::NAMES[] = {
         "元旦", "妇女节", "植树节", "劳动节", "青年节", "儿童节", "建党节", "建军节", "教师节", "国庆节"
     };
 
     string SolarFestival::DATA = "0VV__0Ux0Xc__0Ux0Xg__0_Q0ZV__0Ux0ZY__0Ux0aV__0Ux0bV__0Uo0cV__0Ug0de__0_V0eV__0Ux";
 
     optional<SolarFestival> SolarFestival::from_index(const int year, const int index) {
-        if (index < 0 || static_cast<size_t>(index) >= NAMES.size()) {
+        if (index < 0 || index >= 10) {
             return nullopt;
         }
         const int start = index * 8;
@@ -3929,7 +3929,7 @@ namespace tyme {
 
     optional<SolarFestival> SolarFestival::from_ymd(const int year, const int month, const int day) {
         const SolarDay d = SolarDay::from_ymd(year, month, day);
-        const int size = static_cast<int>(NAMES.size());
+        constexpr int size = 10;
         for (int i = 0; i < size; i++) {
             const int start = i * 8;
             if (const auto e = Event(NAMES[i], "@" + DATA.substr(start, 8)); d.get_year() >= e.get_start_year() && d.get_month() == e.get_value(2) && d.get_day() == e.get_value(3)) {
@@ -3940,7 +3940,7 @@ namespace tyme {
     }
 
     optional<SolarFestival> SolarFestival::next(const int n) const {
-        const int size = static_cast<int>(NAMES.size());
+        constexpr int size = 10;
         const int i = index + n;
         return from_index((day.get_year() * size + i) / size, index_of(i, size));
     }
@@ -3957,14 +3957,14 @@ namespace tyme {
         return get_day().to_string() + " " + get_name();
     }
 
-    const vector<string> LunarFestival::NAMES = {
+    const char* const LunarFestival::NAMES[] = {
         "春节", "元宵节", "龙头节", "上巳节", "清明节", "端午节", "七夕节", "中元节", "中秋节", "重阳节", "冬至节", "腊八节", "除夕"
     };
 
     string LunarFestival::DATA = "2VV__0002Vj__0002WW__0002XX__0003b___0002ZZ__0002bb__0002bj__0002cj__0002dd__0003s___0002gc__0002hV_U000";
 
     optional<LunarFestival> LunarFestival::from_index(const int year, const int index) {
-        if (index < 0 || static_cast<size_t>(index) >= NAMES.size()) {
+        if (index < 0 || index >= 13) {
             return nullopt;
         }
         const int start = index * 8;
@@ -3984,7 +3984,7 @@ namespace tyme {
 
     optional<LunarFestival> LunarFestival::from_ymd(int year, int month, int day) {
         const LunarDay d = LunarDay::from_ymd(year, month, day);
-        const int size = static_cast<int>(NAMES.size());
+        constexpr int size = 13;
         for (int i = 0; i < size; i++) {
             const int start = i * 8;
             const auto e = Event(NAMES[i], "@" + DATA.substr(start, 8));
@@ -4011,7 +4011,7 @@ namespace tyme {
     }
 
     optional<LunarFestival> LunarFestival::next(const int n) const {
-        const int size = static_cast<int>(NAMES.size());
+        constexpr int size = 13;
         const int i = index + n;
         return from_index((day.get_year() * size + i) / size, index_of(i, size));
     }
@@ -4031,7 +4031,7 @@ namespace tyme {
         return get_day().to_string() + " " + get_name();
     }
 
-    const vector<string> RabByungElement::NAMES = {
+    const char* const RabByungElement::NAMES[] = {
         "木", "火", "土", "铁", "水"
     };
 
@@ -4227,7 +4227,7 @@ namespace tyme {
     }
 
     string RabByungMonth::get_name() const {
-        return (leap ? "闰" : "") + LunarMonth::NAMES[month - 1];
+        return string(leap ? "闰" : "") + LunarMonth::NAMES[month - 1];
     }
 
     string RabByungMonth::get_alias() const {
@@ -4328,7 +4328,7 @@ namespace tyme {
         return l;
     }
 
-    const vector<string> RabByungDay::NAMES = {
+    const char* const RabByungDay::NAMES[] = {
         "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"
     };
 
@@ -4396,7 +4396,7 @@ namespace tyme {
     }
 
     string RabByungDay::get_name() const {
-        return (leap ? "闰" : "") + NAMES[day - 1];
+        return string(leap ? "闰" : "") + NAMES[day - 1];
     }
 
     string RabByungDay::to_string() const {
