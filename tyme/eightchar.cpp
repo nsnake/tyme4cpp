@@ -1,17 +1,30 @@
 #include <string>
+
 #include <map>
+
 #include <optional>
+
 #include <cmath>
+
 #include <array>
+
 #include <algorithm>
+
 #include <iostream>
+
 #include <sstream>
+
 #include "tyme.h"
+
 
 using namespace std;
 
+
+
 namespace tyme {
-    LunarHour LunarHour::from_ymd_hms(const int year, const int month, const int day, const int hour, const int minute, const int second) {
+    
+	
+   LunarHour LunarHour::from_ymd_hms(const int year, const int month, const int day, const int hour, const int minute, const int second) {
         return LunarHour(year, month, day, hour, minute, second);
     }
 

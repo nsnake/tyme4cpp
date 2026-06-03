@@ -1,17 +1,27 @@
 #include <string>
+
 #include <map>
+
 #include <optional>
+
 #include <cmath>
+
 #include <array>
+
 #include <algorithm>
+
 #include <iostream>
 #include <sstream>
 #include "tyme.h"
 
+
 using namespace std;
 
+
+		
 namespace tyme {
-    const vector<string> RabByungElement::NAMES = {
+    
+	const vector<string> RabByungElement::NAMES = {
         "木", "火", "土", "铁", "水"
     };
 

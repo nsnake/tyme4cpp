@@ -1,17 +1,27 @@
 #include <string>
+
 #include <map>
 #include <optional>
+
 #include <cmath>
 #include <array>
+
 #include <algorithm>
 #include <iostream>
+
 #include <sstream>
+
 #include "tyme.h"
+
 
 using namespace std;
 
+
+
 namespace tyme {
-    const double JulianDay::J2000 = 2451545;
+    
+	
+const double JulianDay::J2000 = 2451545;
 
     JulianDay JulianDay::from_julian_day(const double day) {
         return JulianDay(day);
